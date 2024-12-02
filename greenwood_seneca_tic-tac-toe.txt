@@ -1,9 +1,17 @@
+'''
+Author: Seneca Greenwood
+Description: Allows user to play against the computer for tic-tac-toe and shows the winner of the game
+Log: 1.0
+Bugs: When entering a letter instead of a number, the code breaks
+Features: Import Random
+Sources: Harrison Servedio, Google
+'''
 import random         #allows to import the random coding into the code block
 board = [
     [1, 2, 3], 
     [4, 5, 6], 
     [7, 8, 9]
-]                      #compares to the board of the game
+]                      #the board of the game
 def print_board(board):
     for row in range(len(board)):
         for col in range(len(board[row])):
@@ -37,13 +45,16 @@ def winner(board):
     elif board[0][2] == board[1][1] == board[2][0]:
         print("Winner")
         exit()
-while True:
+#Args: checls winner if any of the three coordinates on the board are filled with the same symbol and end the code
+
+#Prints: prints the winner if conditions are met
+while True:   #loops the code
     print("Welcome to tic-tac-toe")
     sign = input(str.lower("You will be x. Do you want to start? Say: start")) #gives the option to start the code
     if sign == 'start':  #if user starts, begin the rest of code and if not resets the code to make user play
         count = 0
         print_board(board)   #prints the board at the start
-        break
+        break   #ends loop
     else:
         print("Invalid Option")
 while count <= 9:
@@ -69,15 +80,15 @@ while count <= 9:
         elif user_turn == 9 and board[2][2] == 9:
             board[2][2] = user_sign       
         else:
-            print("Invalid Option") 
-        validMoves.remove(user_turn)
-        print_board(board)
-        winner(board)
-        count +=1
-        comp_sign = 'o'
+            print("Invalid Option")     #Allows user to enter an option from the board and replaces the number with an x symbol
+        validMoves.remove(user_turn)    #Removes a number option from the list to make sure not to be able to use next turn
+        print_board(board)    #prints the board with changes
+        winner(board)  
+        count +=1             #every turn add to the count by 1
+        comp_sign = 'o'    #the symbolm of computer
         comp_turn = print("My turn now")
-        comp_choices = random.choice(validMoves)
-        validMoves.remove(comp_choices)
+        comp_choices = random.choice(validMoves)   #computer chooses random number in the list
+        validMoves.remove(comp_choices)  #Removes a number option from the list to make sure not to be able to use next turn
         if comp_choices == 1 and board[0][0] == 1:
             board[0][0] = comp_sign
         elif comp_choices == 2 and board[0][1] == 2:
@@ -97,11 +108,11 @@ while count <= 9:
         elif comp_choices == 9 and board[2][2] == 9:
             board[2][2] = comp_sign
         else:
-            continue
-        print_board(board)
+            continue   #Allows computer to enter an option from the board and replaces the number with an o symbol
+        print_board(board)   #prints the board with changes
         winner(board)
-        count +=1
+        count +=1        #every turn add to the count as 1
         if count == 9:
-            print("Tie")    
-
+            print("Tie")   
+        break                #if the 9 turns pass, end code as a tie
     
