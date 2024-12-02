@@ -1,0 +1,107 @@
+import random         #allows to import the random coding into the code block
+board = [
+    [1, 2, 3], 
+    [4, 5, 6], 
+    [7, 8, 9]
+]                      #compares to the board of the game
+def print_board(board):
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            print(board[row][col], end = " ")
+        print("")
+#Args: shows the rows and columns of the board
+validMoves = [1, 2, 3, 4, 5, 6, 7, 8, 9]                  #A list of all possible moves
+#Prints: prints the whole board with spaces
+def winner(board):
+    if board[0][0] == board[0][1] == board[0][2]:
+        print("Winner")
+        exit()
+    elif board[1][0] == board[1][1] == board[1][2]:
+        print("Winner")
+        exit()
+    elif board[2][0] == board[2][1] == board[2][2]:
+        print("Winner")
+        exit()
+    elif board[0][1] == board[1][1] == board[2][1]:
+        print("Winner")
+        exit()
+    elif board[0][0] == board[1][0] == board[2][0]:
+        print("Winner")
+        exit()
+    elif board[0][2] == board[1][2] == board[2][2]:
+        print("Winner")
+        exit()
+    elif board[0][0] == board[1][1] == board[2][2]:
+        print("Winner")
+        exit()
+    elif board[0][2] == board[1][1] == board[2][0]:
+        print("Winner")
+        exit()
+while True:
+    print("Welcome to tic-tac-toe")
+    sign = input(str.lower("You will be x. Do you want to start? Say: start")) #gives the option to start the code
+    if sign == 'start':  #if user starts, begin the rest of code and if not resets the code to make user play
+        count = 0
+        print_board(board)   #prints the board at the start
+        break
+    else:
+        print("Invalid Option")
+while count <= 9:
+    while True:  #loops the code
+        user_sign = 'x'    #the symbol of the user
+        user_turn = int(input("Choose your number space then I will go")) #gives option to enter a number of 1 through 9 on the board 
+        if user_turn == 1 and board[0][0] == 1:
+            board[0][0] = user_sign
+        elif user_turn == 2 and board[0][1] == 2:
+            board[0][1] = user_sign
+        elif user_turn == 3 and board[0][2] == 3:
+            board[0][2] = user_sign
+        elif user_turn == 4 and board[1][0] == 4:
+            board[1][0] = user_sign
+        elif user_turn == 5 and board[1][1] == 5:
+            board[1][1] = user_sign
+        elif user_turn == 6 and board[1][2] == 6:
+            board[1][2] = user_sign
+        elif user_turn == 7 and board[2][0] == 7:
+            board[2][0] = user_sign
+        elif user_turn == 8 and board[2][1] == 8:
+            board[2][1] = user_sign
+        elif user_turn == 9 and board[2][2] == 9:
+            board[2][2] = user_sign       
+        else:
+            print("Invalid Option") 
+        validMoves.remove(user_turn)
+        print_board(board)
+        winner(board)
+        count +=1
+        comp_sign = 'o'
+        comp_turn = print("My turn now")
+        comp_choices = random.choice(validMoves)
+        validMoves.remove(comp_choices)
+        if comp_choices == 1 and board[0][0] == 1:
+            board[0][0] = comp_sign
+        elif comp_choices == 2 and board[0][1] == 2:
+            board[0][1] = comp_sign
+        elif comp_choices == 3 and board[0][2] == 3:
+            board[0][2] = comp_sign
+        elif comp_choices == 4 and board[1][0] == 4:
+            board[1][0] = comp_sign
+        elif comp_choices == 5 and board[1][1] == 5:
+            board[1][1] = comp_sign
+        elif comp_choices == 6 and board[1][2] == 6:
+            board[1][2] = comp_sign
+        elif comp_choices == 7 and board[2][0] == 7:
+            board[2][0] = comp_sign
+        elif comp_choices == 8 and board[2][1] == 8:
+            board[2][1] = comp_sign
+        elif comp_choices == 9 and board[2][2] == 9:
+            board[2][2] = comp_sign
+        else:
+            continue
+        print_board(board)
+        winner(board)
+        count +=1
+        if count == 9:
+            print("Tie")    
+
+    
