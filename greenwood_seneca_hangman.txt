@@ -1,0 +1,78 @@
+'''
+Seneca Greenwood
+Description: A game of hangman that chooses from a selection of words randomly to the ask the user to guess letters to then get the word  
+Log: 1.0
+Bugs: None
+Features: Random
+Sources: Ms. Marciano 
+'''
+import random                                                      #accesses the random code blocks
+                                                                   #a list of pictures of hangman game                               
+hangman_pics = ['''                                       
+   +----+
+        |
+        |
+        |
+      =====''', '''
+   +----+
+   O    |
+        |
+        |
+      =====''', '''
+   +----+
+   O    |
+   |    |
+        |
+      =====''', '''
+   +----+
+   O    |
+  /|    |
+        |
+      =====''', '''
+   +----+
+   O    |
+  /|\   |
+        |
+      =====''', '''
+   +----+
+   O    |
+  /|\   |
+  /     |
+      =====''', '''
+   +----+
+   O    |
+  /|\   |
+  / \   |
+      =====''']
+word = ["school","paws","python","diploma","advisory","class","hallway","makerspace","orange","black","tiger","geometry", "library","pride","respect","diversity","integrity","greenwich","truth","calculus","physics","seminar","biology","history","english","freshman","junior","senior","sophomore"] #the list of words that will be chosen randomly 
+unknown = random.choice(word)                       
+unknown_list = list(unknown)
+cover = []                                           
+prediction = 0                                                        #starts the guesses count as 0 
+for character in unknown_list:                                        #for every letter in the word, it covers the letter with dashes and prints the dashes for the covered word
+    if character == " ":
+        cover.append("  ")
+    else:
+           cover.append("_ ")
+print("".join(cover))                                                 #creates word into a string for an output to the user
+while "_ " in cover and prediction < len(hangman_pics) - 1:           #every guess that is wrong subtracts a turn by 1 all the way to 6 which is the loop
+    while True:
+        guess = str.lower(input("Enter a letter:"))                   #allows user to input a letter only
+        if guess not in list("qwertyuiopasdfghjklzxcvbnm "):
+            print("Please enter a letter!")
+        else:
+            break
+    if guess in unknown_list:                                         #if the user's guess is in the word, the index of the word will change from the dash to the letter
+        for index in range(len(unknown_list)):
+            if guess == unknown_list[index]:
+                cover[index] = guess 
+        print("".join(cover))
+    else:
+        print("Not Inside the Word")                                  #otherwise player loses a turn and inserts the next hangman pic while showing length of word
+        prediction += 1 
+        print(hangman_pics[prediction])
+        print("".join(cover))
+if "_ " in cover:
+    print(f"You Lost! The word was {unknown}")                        #if any dashes are in the word after turns are over, tells user that they lost and what the word was
+else:
+    print("You Won!")                                                 #otherwise tells user that they won
