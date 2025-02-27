@@ -1,0 +1,252 @@
+'''
+Seneca Greenwood
+Description: Allows user to type a name and gives options to edit the name by using strings functions that are hand coded 
+Log: 1.0
+Bugs: None
+Features: Random
+Sources: https://www.geeksforgeeks.org/ascii-table/
+'''
+def vowel_finder(letters):
+
+    '''
+    Desription: Counts the vowels in the full name
+
+    Args: Checks name for vowels
+
+    Returns: Number of vowels
+    '''
+
+    vcounter = 0
+    vowel = list("aeiouAEIOU")
+    for alphabet in letters:                                                  
+        if alphabet in vowel:
+            vcounter = vcounter + 1                                           
+    return vcounter
+
+def consonant_counting(user_str):
+
+    '''  
+    Desription: Counts the consonant in the full name
+
+    Args: Checks name for consonants
+
+    Returns: Number of consonants
+    '''                           
+
+    ccounter = 0
+    consonant = list("qQwWrRtTyYpPlLkKjJhHgGfFdDsSzZxXcCvVbBnNmM")            
+    for alphabet in user_str:
+        if alphabet in consonant:                                             
+            ccounter = ccounter + 1
+    return ccounter
+
+def switch_lower(user_str):
+
+    '''
+    Desription: Checks if character is uppercase and converst to lowercase
+
+    Args: Check if character is uppercase
+
+    Returns: name in lowercase form
+    '''         
+
+    output = ""
+    for char in user_str:
+        if 'A' <= char <= 'Z':                                                
+            char_code = ord(char)
+            output += chr(char_code + 32)                                          # +32 is the start of the range of lowercase letters in python ASCII values                             
+        else:
+            output += char
+    return output
+
+def switch_upper(user_str):
+
+    '''
+    Desription: Check if character is lowecrase and converst to uppercase
+
+    Args: Check if character is lowercase
+
+    Returns: name in uppercase form                                           
+    '''  
+
+    output = ""
+    for char in user_str:
+        if 'a' <= char <= 'z':                                               
+            char_code = ord(char)
+            output += chr(char_code - 32)                                          # -32 is the start of the range of lowercase letters in python ASCII values                            
+        else:
+            output += char
+    return output
+
+def mixer(full_name):
+
+    '''
+    Desription: Creates a random name by mixing up letters in full name
+
+    Args: Removes words from input and collects them
+
+    Returns: letters in random order
+    '''        
+
+    import random
+    output = ""
+    guide = [i for i in range(len(full_name))]
+    while guide:
+        random_guide = random.randint(0, len(guide) - 1)
+        chosen_guide = guide.pop(random_guide)
+        output += full_name[chosen_guide]
+    return output
+
+def palindromes(full_name):
+
+    '''
+    Desription: gives a true or false if the name is a palindrome
+
+    Args: Splits code 
+
+    Returns: True statement if word is a palindrome if not, return False
+    '''
+
+    splitter = full_name.split(" ") 
+    (splitter[0])
+    if (splitter[0]) == (splitter[0])[::-1]:
+        return True    
+    else: 
+        return False 
+
+def find_initials(full_name):
+
+    '''
+    Desription: Gets the initails of the full name
+
+    Args: Splits first, middle, and last name, then splits the 0 index of each
+
+    Returns: The 0 indexies from the names
+    '''
+
+    names = full_name.split()
+    initials = ""
+    for name in names:
+        initials += name[0] 
+    return initials
+
+def distinction(full_name):
+
+    '''
+    Desription: Gives true of false if the name has a title in it eg. "Dr." or "Sir"
+
+    Args: Searches for any titles in the list 
+
+    Returns: True if any titles are in the full name, if not returns false
+    '''
+
+    title = ["Dr.","Sir","Mr.","Mrs.","Esq","Ph.d","Duke","Prof.","Ms."]
+    for titles in title:
+        if titles in full_name: 
+            return True
+        else:
+            return False 
+    
+    
+    
+
+
+
+def main():
+    full_name = input("Please enter full name including middle: ")              #asks user to type thier full name 
+    print("1. Reverse and display")
+    print("2. Determine the number of vowels. You can prompt user for a particular vowel orcreate subtotals of each.")
+    print("3. Consonant frequency.")
+    print("4. Return first name.")
+    print("5. Return last name.")
+    print("6. Return middle name(s)")
+    print("7. Return boolean if last name contains a hyphen")
+    print("8. Function to convert to lowercase")
+    print("9. Function to convert to uppercase")
+    print("10. Modify array to create a random name (mix up letters)")
+    print("11. Return boolean if first name is a palindrome")
+    print("12. Make initials from name")
+    print("13. Return boolean if name contains a title/distinction (“Dr.”, “Sir”, “Esq”, “Ph.d”)")
+    print("14. Exit code")
+    
+    menu = input("Choose a Function ")                                          #askes user to choose an option for what the code should do 
+    
+    if menu == "1":                                                             #flips starting integer to end of name then prints it
+        backwards = full_name[::-1]
+        print(backwards)
+
+    elif menu == "2":
+        vcounter = vowel_finder(full_name)
+        print("vowels: ", vcounter)
+
+    elif menu == "3":
+        ccounter = consonant_counting(full_name)
+        print("consonants", ccounter)
+
+    elif menu == "4":                                                            #Seperates first name from full name and prints it
+        splitter = full_name.split(" ") 
+        print(splitter[0])
+
+    elif menu == "5":                                                            #Seperates last name from full name and prints it
+        splitter = full_name.split(" ")
+        print(splitter[-1])
+
+    elif menu == "6":                                                            #Seperates middle name(s) from full name and prints it
+        splitter = full_name.split(" ")                                        
+        split_fuse = splitter[1:-1]
+        print(' '.join(split_fuse))
+
+    elif menu == "7":                                                            #Splits name and searches for hyphen
+        boolean = False
+        last_name = full_name.split(" ")                                         #If there is a hyphen returns True to user 
+        last_hyphen = last_name[-1]
+        for i in range(len(last_hyphen)):
+            hyphen = list(last_hyphen)
+            if hyphen[i] =="-":
+                boolean = True
+                break
+        print(boolean)
+
+    elif menu == "8":
+        string = full_name
+        lowercase = switch_lower(string)
+        print(lowercase)
+
+    elif menu == "9":
+        string = full_name
+        uppercase = switch_upper(string)
+        print(uppercase)
+
+    elif menu == "10":
+        string = full_name
+        scatter = mixer(string)
+        print(scatter)
+
+    elif menu == "11":
+        string = full_name
+        reverse_name = palindromes(string)
+        print(reverse_name)
+
+    elif menu == "12":
+        print("Initials:", find_initials(full_name))
+
+    elif menu == "13":
+        string = full_name
+        output = distinction(string)
+        print(output)
+    elif menu == "14":
+        quit()
+    else:
+        print("Invalid")                                                          #Any other variable goes to next code without menu
+
+    while True:                                                                   #Puts code in a loop
+            change_full_name = input("Do you want to change name? (Enter Y or N)")#Asks user to change name or keep name to restart code
+            change_full_name = change_full_name[0]
+            if change_full_name == "N" or change_full_name == "n":
+                    break
+            elif change_full_name == "Y" or change_full_name == "y":
+                main()
+            else:
+                print("Invalid")
+                continue
+main()
